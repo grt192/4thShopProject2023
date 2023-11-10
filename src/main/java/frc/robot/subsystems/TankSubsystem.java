@@ -30,11 +30,15 @@ public class TankSubsystem extends SubsystemBase {
     rightMotor = new WPI_TalonSRX(RIGHT_FRONT_MOTOR_ID);
     rightMotorFollower = new WPI_TalonSRX(RIGHT_BACK_MOTOR_ID);
     rightMotorFollower.follow(rightMotor);
+    rightMotor.setInverted(true);
   }
 
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+    leftMotor.set(0.5);
+    rightMotor.set(0.5);
+  }
 
 
 
