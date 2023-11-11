@@ -4,18 +4,17 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class TankSubsystem extends SubsystemBase {
-  
-  private static final int RIGHT_BACK_MOTOR_ID = 0;
-  private static final int RIGHT_FRONT_MOTOR_ID = 1;
-  private static final int LEFT_BACK_MOTOR_ID = 2;
-  private static final int LEFT_FRONT_MOTOR_ID = 3;
+import static frc.robot.Constants.DrivetrainConstants.*;
 
+public class TankSubsystem extends SubsystemBase {
+  /* Motors go vroom */
   private final WPI_TalonSRX leftMotor;
   private final WPI_TalonSRX leftMotorFollower;
   private final WPI_TalonSRX rightMotor;
@@ -23,24 +22,36 @@ public class TankSubsystem extends SubsystemBase {
 
   /** Creates a new TankSubsystem. */
   public TankSubsystem() {
+    /* Left Motors */
     leftMotor = new WPI_TalonSRX(LEFT_FRONT_MOTOR_ID);
     leftMotorFollower = new WPI_TalonSRX(LEFT_BACK_MOTOR_ID);
+    leftMotor.setNeutralMode(NeutralMode.Brake);
     leftMotorFollower.follow(leftMotor);
 
+    /* Right Motors */
     rightMotor = new WPI_TalonSRX(RIGHT_FRONT_MOTOR_ID);
     rightMotorFollower = new WPI_TalonSRX(RIGHT_BACK_MOTOR_ID);
+    rightMotor.setNeutralMode(NeutralMode.Brake);
+    rightMotor.setInverted(InvertType.InvertMotorOutput);
+    rightMotorFollower.setInverted(InvertType.FollowMaster);
     rightMotorFollower.follow(rightMotor);
-    rightMotor.setInverted(true);
   }
-
 
   @Override
   public void periodic() {
-    leftMotor.set(0.5);
-    rightMotor.set(0.5);
+    setMotors(0.5, 0.5);
   }
 
-
+  /**
+   * Sets the drivetrain motors' speeds.
+   * 
+   * @param leftSpeed
+   * @param rightSpeed
+   */
+  public void setMotors(double leftSpeed, double rightSpeed) {
+    leftMotor.set(leftSpeed);
+    rightMotor.set(rightSpeed);
+  }
 
   /* No touch */
   @Override
@@ -49,7 +60,8 @@ public class TankSubsystem extends SubsystemBase {
   }
 
   /**
-   * An example method querying a boolean state of the subsystem (for example, a digital sensor).
+   * An example method querying a boolean state of the subsystem (for example, a
+   * digital sensor).
    *
    * @return value of some boolean subsystem state, such as a digital sensor.
    */

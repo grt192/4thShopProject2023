@@ -16,4 +16,12 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+
+  public static class DrivetrainConstants {
+    /* CAN Link IDs */
+    public static final int RIGHT_BACK_MOTOR_ID  = 0;
+    public static final int RIGHT_FRONT_MOTOR_ID = 1;
+    public static final int LEFT_BACK_MOTOR_ID   = 2;
+    public static final int LEFT_FRONT_MOTOR_ID  = 3;
+  }
 }
