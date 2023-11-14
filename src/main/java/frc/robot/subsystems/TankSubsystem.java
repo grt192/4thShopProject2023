@@ -8,10 +8,13 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.DrivetrainConstants.*;
+import static frc.robot.Constants.OperatorConstants;
 
 public class TankSubsystem extends SubsystemBase {
   /* Motors go vroom */
@@ -20,6 +23,11 @@ public class TankSubsystem extends SubsystemBase {
   private final WPI_TalonSRX rightMotor;
   private final WPI_TalonSRX rightMotorFollower;
 
+  private final XboxController controller;
+
+  private double leftSpeed;
+  private double rightSpeed;
+  
   /** Creates a new TankSubsystem. */
   public TankSubsystem() {
     /* Left Motors */
@@ -35,22 +43,35 @@ public class TankSubsystem extends SubsystemBase {
     rightMotor.setInverted(InvertType.InvertMotorOutput);
     rightMotorFollower.setInverted(InvertType.FollowMaster);
     rightMotorFollower.follow(rightMotor);
+
+    /* Controls */
+    controller = new XboxController(OperatorConstants.kDriverControllerPort);
+
+    /* Default Speeds upon Initialization */
+    leftSpeed = 0.0;
+    rightSpeed = 0.0;
   }
 
   @Override
   public void periodic() {
-    setMotors(0.5, 0.5);
+    double throttlePower = controller.getLeftY() / 2;
+    double turnPower = -controller.getRightX() / 2;
+    arcadeDrive(throttlePower, turnPower);
+
+    leftMotor.set(leftSpeed);
+    rightMotor.set(rightSpeed);
   }
 
   /**
-   * Sets the drivetrain motors' speeds.
+   * Sets the drivetrain motors' speeds using an arcade system.
+   * <p> Sum of absolute values of parameters should not exceed 1.0.
    * 
-   * @param leftSpeed
-   * @param rightSpeed
+   * @param throttlePower The forward/backward motion of the robot.
+   * @param turnPower The robot's turning speed. 
    */
-  public void setMotors(double leftSpeed, double rightSpeed) {
-    leftMotor.set(leftSpeed);
-    rightMotor.set(rightSpeed);
+  public void arcadeDrive(double throttlePower, double turnPower) {
+    leftSpeed = MathUtil.clamp(throttlePower + turnPower, -1.0, 1.0);
+    rightSpeed = MathUtil.clamp(throttlePower - turnPower, -1.0, 1.0);
   }
 
   /* No touch */
