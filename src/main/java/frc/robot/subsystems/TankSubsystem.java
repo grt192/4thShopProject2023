@@ -72,8 +72,8 @@ public class TankSubsystem extends SubsystemBase {
    * @param turnPower The robot's turning speed. 
    */
   public void arcadeDrive(double throttlePower, double turnPower) {
-    leftSpeed = MathUtil.clamp(throttlePower + turnPower, -1.0, 1.0);
-    rightSpeed = MathUtil.clamp(throttlePower - turnPower, -1.0, 1.0);
+    leftSpeed = MathUtil.clamp(throttlePower + turnPower, -1.0, +1.0);
+    rightSpeed = MathUtil.clamp(throttlePower - turnPower, -1.0, +1.0);
   }
 
   /* No touch */
