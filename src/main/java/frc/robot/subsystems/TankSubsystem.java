@@ -34,12 +34,14 @@ public class TankSubsystem extends SubsystemBase {
     leftMotor = new WPI_TalonSRX(LEFT_FRONT_MOTOR_ID);
     leftMotorFollower = new WPI_TalonSRX(LEFT_BACK_MOTOR_ID);
     leftMotor.setNeutralMode(NeutralMode.Brake);
+    leftMotorFollower.setNeutralMode(NeutralMode.Brake);
     leftMotorFollower.follow(leftMotor);
 
     /* Right Motors */
     rightMotor = new WPI_TalonSRX(RIGHT_FRONT_MOTOR_ID);
     rightMotorFollower = new WPI_TalonSRX(RIGHT_BACK_MOTOR_ID);
     rightMotor.setNeutralMode(NeutralMode.Brake);
+    rightMotorFollower.setNeutralMode(NeutralMode.Brake);
     rightMotor.setInverted(InvertType.InvertMotorOutput);
     rightMotorFollower.setInverted(InvertType.FollowMaster);
     rightMotorFollower.follow(rightMotor);
@@ -54,8 +56,8 @@ public class TankSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    double throttlePower = controller.getLeftY() / 2;
-    double turnPower = -controller.getRightX() / 2;
+    double throttlePower = -controller.getLeftY() * THROTTLE_SCALE;
+    double turnPower = controller.getRightX() * TURN_SCALE;
     arcadeDrive(throttlePower, turnPower);
 
     leftMotor.set(leftSpeed);
