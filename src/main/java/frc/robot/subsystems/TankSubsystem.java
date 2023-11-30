@@ -48,6 +48,19 @@ public class TankSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+<<<<<<< HEAD
+=======
+    setMotors(0.5, 0.5);
+  }
+
+  /**
+   * Sets the drivetrain motors' speeds.
+   * 
+   * @param leftSpeed
+   * @param rightSpeed
+   */
+  public void setMotors(double leftSpeed,double rightSpeed) {
+>>>>>>> ae03a7b (adde flywheel)
     leftMotor.set(leftSpeed);
     rightMotor.set(rightSpeed);
   }
