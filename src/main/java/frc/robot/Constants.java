@@ -31,7 +31,7 @@ public final class Constants {
   public static class flywheelConstants{
     public static final int WHEEL_MOTOR_ID = 4;
     public static final int CONTROLLER_ID = 5;
-    public static final double FLYSPEED = 0.5;
+    public static final double FLYSPEED = 0.7;
 
   }
 }

@@ -1,16 +1,19 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.XboxController;
+
+
 import static frc.robot.Constants.flywheelConstants.*;
 
 public class flywheel extends SubsystemBase{
-    private final WPI_TalonSRX wheelmotor;
+    private final CANSparkMax wheelmotor;
     private final XboxController controller;
 
     public flywheel(){
-        wheelmotor = new WPI_TalonSRX(WHEEL_MOTOR_ID);
+        wheelmotor = new CANSparkMax(WHEEL_MOTOR_ID, MotorType.kBrushless);
         controller = new XboxController(CONTROLLER_ID);
     }
     
