@@ -8,21 +8,23 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import static frc.robot.Constants.flywheelConstants.*;
 
-public class flywheel extends SubsystemBase{
+public class FlywheelSubsystem extends SubsystemBase{
     private final CANSparkMax wheelmotor;
-    private final XboxController controller;
+    private boolean running = false;
 
-    public flywheel(){
+    public FlywheelSubsystem(){
         wheelmotor = new CANSparkMax(WHEEL_MOTOR_ID, MotorType.kBrushless);
-        controller = new XboxController(CONTROLLER_ID);
     }
     
     public void periodic(){
-        if(controller.getRightBumperPressed())
+        if(running){
             wheelmotor.set(FLYSPEED);
-        
-        if(controller.getRightBumperReleased())
-            wheelmotor.set(0);
+        }
+        else wheelmotor.set(0);
 
-    }    
+    }
+    
+    public void setFlywheel(boolean on){
+        running = on;
+    }
 }
