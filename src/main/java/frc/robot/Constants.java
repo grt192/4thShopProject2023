@@ -29,7 +29,7 @@ public final class Constants {
     public static final double THROTTLE_SCALE = 0.5;
     public static final double TURN_SCALE = 0.25;
   }
-  public static class flywheelConstants{
+  public static class FlywheelConstants{
     public static final int WHEEL_MOTOR_ID = 2;
     public static final int CONTROLLER_ID = 0;
     public static final double FLYSPEED = 0.53;

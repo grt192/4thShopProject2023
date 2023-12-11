@@ -3,10 +3,9 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.XboxController;
 
 
-import static frc.robot.Constants.flywheelConstants.*;
+import static frc.robot.Constants.FlywheelConstants.*;
 
 public class FlywheelSubsystem extends SubsystemBase{
     private final CANSparkMax wheelmotor;
