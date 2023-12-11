@@ -15,6 +15,7 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int kMechControllerPort = 1;
   }
 
   public static class DrivetrainConstants {
@@ -27,5 +28,10 @@ public final class Constants {
     /* Motor Speed Scaling */
     public static final double THROTTLE_SCALE = 0.5;
     public static final double TURN_SCALE = 0.25;
+  }
+  public static class FlywheelConstants{
+    public static final int WHEEL_MOTOR_ID = 2;
+    public static final int CONTROLLER_ID = 0;
+    public static final double FLYSPEED = 0.53;
   }
 }
