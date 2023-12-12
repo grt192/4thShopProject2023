@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 public class PusherSubsystem{
     private DoubleSolenoid solenoid;
     private XboxController controller;
-    public PusherSubsystem(DoubleSolenoid solenoid, double uptime, XboxController controller){
+    public PusherSubsystem(DoubleSolenoid solenoid, XboxController controller){
         this.solenoid = solenoid;
         this.controller = controller;
     } 
