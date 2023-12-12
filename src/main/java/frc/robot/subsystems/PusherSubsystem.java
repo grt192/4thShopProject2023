@@ -11,10 +11,10 @@ public class PusherSubsystem{
     } 
     public void  periodic(){
         if(controller.getLeftBumperPressed()){
-            solenoid.set(DoubleSolenoid.Value.valueOf("kForward"));
+            solenoid.set(DoubleSolenoid.Value.valueOf("kReverse"));
         }
         else{
-            solenoid.set(DoubleSolenoid.Value.valueOf("kReverse"));
+            solenoid.set(DoubleSolenoid.Value.valueOf("kForward"));
         }
     }
     
