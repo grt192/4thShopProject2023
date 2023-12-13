@@ -2,6 +2,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.XboxController;
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
+
+
 public class PusherSubsystem{
     private DoubleSolenoid solenoid;
     private XboxController controller;
@@ -9,12 +12,14 @@ public class PusherSubsystem{
         this.solenoid = solenoid;
         this.controller = controller;
     } 
-    public void  periodic(){
+    public void periodic(){
         if(controller.getLeftBumperPressed()){
-            solenoid.set(DoubleSolenoid.Value.valueOf("kReverse"));
+            solenoid.set(kForward);
+            System.out.println("kForward");
         }
         else{
-            solenoid.set(DoubleSolenoid.Value.valueOf("kForward"));
+            solenoid.set(kReverse);
+            System.out.println("kReverse");
         }
     }
     
