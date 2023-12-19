@@ -2,10 +2,12 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 
 
-public class PusherSubsystem{
+public class PusherSubsystem extends SubsystemBase{
     private DoubleSolenoid solenoid;
     private XboxController controller;
     public PusherSubsystem(DoubleSolenoid solenoid, XboxController controller){
